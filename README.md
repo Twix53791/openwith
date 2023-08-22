@@ -1,7 +1,7 @@
 # openwith
-Superfast, hackable and reliable alternative to xdg-open. Assign your favorites applications to file types.
+Superfast, hackable and reliable alternative to xdg-open, both user-friendly and easily customizable.
 
-It follows the Unix philosphy: "doing one thing and doing it well". It associates file extensions or mime types with a list of applications (commands, bin files), the first one of the list being the default one. The list of associations is set in one file, easy to understand, read and edit.
+It follows the Unix philosphy: "doing one thing and doing it well". Openwith uses a configuration file to determine which application should be used to open a file. Each rule in the config file associates a file extension or a mime type with a list of applications (commands, bin files), the first one of the list being the default one. The config file syntax is really simple, focusing on readability and efficiency.
 
 ## Use
 `$(openwith <file>) <file>` : the file will be opened with the default application.
@@ -18,9 +18,10 @@ It is recommanded to combine the -a flag with -o flag for multiples files.
 In the config file, the application names cannot contains spaces (there are supposed to be commands). It is not possible to run commands with flags, for example to run `kitty -e ranger`. To use this kind of complex syntax, just create a script in /usr/local/bin, running the complex command, and run this script instead with openwith.
 
 ## Config format
-The principle of openwith is to check the file type by the file extension instead of the file type, to be faster and more customizable than xdg-open.
-Instead of using the mimeapps.list file to associate a mimetype to a .desktop file executing the application, it associates a file extention to a list of possible applications, the first one being the default one. This list of association is set in a file named by default ~/.config/openwith.conf.
+The principle of openwith is to check the file type by the file extension instead of the mime type, to be faster and more customizable than xdg-open (not every file extension has a specific mime type, especially rare file extension like the camera raw files).<br>
+Instead of using the mimeapps.list file to associate a mimetype to a .desktop file executing the application, it associates a file extention to a list of possible applications, the first one being the default one. This list of rules is set in a file named by default ~/.config/openwith.conf (can be anything, just edit the script to change that).
 
+Rule format:<br>
 `extension <default app> <secondary apps`<br>
 examples: see openwith.conf
 
