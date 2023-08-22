@@ -36,9 +36,10 @@ cf. openwith.conf for an example...
        This process if much slower than checking the file extension, that's why is recommanded to add as much as possible of extension types in openwith.conf to avoid the need of checking the mime type.<br>
 `-a` : print the all list of applications associated with a file extension/mime type.<br>
 `-o` : print the output on one line only (but associated with `-a`, it will be one line per file).
-`-n` : if the file extension if not found (and neither the mime type if `-m` is used), openwith open the file with the application associated with the type `unknown` in openwith.conf. This flag overwrites this behavior and print `null` instead. It is designed to be use in scripting.
-`-d` : debug.
+`-n` : if the file extension if not found (and neither the mime type if `-m` is used), openwith open the file with the application associated with the type `unknown` in openwith.conf. This flag overwrites this behavior and print `null` instead. It is designed to be use in scripting.<br>
+`-d` : debug.<br>
 `-h/--help` : help.
+
 ## Install
 Copy openwith to /usr/local/bin.<br>
 Copy openwith to ~/.config/openwith.conf (to change its location/name, just edit /usr/local/bin/openwith).
