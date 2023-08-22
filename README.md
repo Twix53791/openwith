@@ -1,6 +1,8 @@
 # openwith
 Superfast, hackable and reliable alternative to xdg-open. Assign your favorites applications to file types.
 
+It follows the Unix philosphy: "doing one thing and doing it well". It associates file extensions or mime types with a list of applications (commands, bin files), the first one of the list being the default one. The list of associations is set in one file, easy to understand, read and edit.
+
 ## Use
 `$(openwith <file>) <file>` : the file will be opened with the default application.
 - It works on multiples files: `$(openwith <file1> <file1> <...>) <file1> <file2> <...>`
@@ -11,6 +13,9 @@ Superfast, hackable and reliable alternative to xdg-open. Assign your favorites 
 #### Openwith can also be usefull in scripting:
 `openwith -a <file>` : list all the possible applications you defined for a file type
 It is recommanded to combine the -a flag with -o flag for multiples files.
+
+#### Run complex commands?
+In the config file, the application names cannot contains spaces (there are supposed to be commands). It is not possible to run commands with flags, for example to run `kitty -e ranger`. To use this kind of complex syntax, just create a script in /usr/local/bin, running the complex command, and run this script instead with openwith.
 
 ## Config format
 The principle of openwith is to check the file type by the file extension instead of the file type, to be faster and more customizable than xdg-open.
