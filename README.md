@@ -1,5 +1,5 @@
 # openwith
-Superfast, hackable and reliable alternative to xdg-open, both user-friendly and easily customizable.
+Superfast, hackable and reliable alternative to xdg-open, both user-friendly and easily customizable. Xdg-open is bad. Use openwith instead!
 
 It follows the Unix philosphy: "doing one thing and doing it well". Openwith uses a configuration file to determine which application should be used to open a file. Each rule in the config file associates a file extension or a mime type with a list of applications (commands, bin files), the first one of the list being the default one. The config file syntax is really simple, focusing on readability and efficiency.
 
