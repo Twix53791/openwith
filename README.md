@@ -47,7 +47,7 @@ Copy openwith to ~/.config/openwith.conf (to change its location/name, just edit
 
 ## Why I wrote this script?
 #### Xdg-open is bad
-The main problem with xfg-open is it not recognized rare file types. Many rare file extensions have not a specific mime type, and xdg-open just don't find them. Moreover, the .desktop files used by xdg-open to run applications is uselessly complicated (with openwith, just wrote shell scripts to run complex commands). Another sad thing if xdg-open can't be used to choose between a list of possibles applications (openwith can do that very simply).
+The main problem with xfg-open is it not recognized rare file types. Many rare file extensions have not a specific mime type, and xdg-open just don't find them. Moreover, the .desktop files used by xdg-open to run applications is uselessly complicated (with openwith, just wrote shell scripts to run complex commands). Another sad thing if xdg-open can't be used to choose between a list of possibles applications (openwith can do that very simply). MOREOVER it cannot deal with multiple files, you have to run multiple time the command and then it is slow...
 
 #### The alternatives are not enough simple, versatile and reliable
 Many alternatives to xdg-open exist on github ([slopen](https://github.com/hckiang/slopen), [jaro](https://github.com/isamert/jaro), [mimi](https://github.com/march-linux/mimi), [semame](https://github.com/green7ea/sesame), [prodigy](https://github.com/yogeshdcool/prodigy), or rifle with ranger), BUT<br>
