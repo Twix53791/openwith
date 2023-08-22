@@ -26,6 +26,19 @@ examples: see openwith.conf
 
 But you can ALSO associate apps to mimetype, in the section `[mime]` of the config. All the following associations will be used only with the `-m` flag if the file extension doesn't match any one in the config, or if the file extension is not found. 
 
+NOTES:<br>
+You can associate applications to open directories with the `directory` type.<br>
+You can define applications by default if the file extension if not found, neither the mime type when `-m` is used, by setting the `unknown` type.<br>
+cf. openwith.conf for an example...
+
+## Flags
+`-m` : if the file extension is missing or not found in openwith.conf, openwith will check the mime type of the file using the command `file -Lb --mime-type <file>`.
+       This process if much slower than checking the file extension, that's why is recommanded to add as much as possible of extension types in openwith.conf to avoid the need of checking the mime type.<br>
+`-a` : print the all list of applications associated with a file extension/mime type.<br>
+`-o` : print the output on one line only (but associated with `-a`, it will be one line per file).
+`-n` : if the file extension if not found (and neither the mime type if `-m` is used), openwith open the file with the application associated with the type `unknown` in openwith.conf. This flag overwrites this behavior and print `null` instead. It is designed to be use in scripting.
+`-d` : debug.
+`-h/--help` : help.
 ## Install
 Copy openwith to /usr/local/bin.<br>
 Copy openwith to ~/.config/openwith.conf (to change its location/name, just edit /usr/local/bin/openwith).
