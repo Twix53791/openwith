@@ -1,0 +1,126 @@
+#!/bin/perl
+# MADE BY twix :: https://github.com/Twix53791/openwith
+#=======================================================
+
+use Getopt::Std;
+
+####################
+### Config file ####
+# Edit this line to set the config file
+my $configfile = "$ENV{HOME}/.config/openwith.conf";
+
+
+#########################
+### Parse arguments #####
+getopts('maondh');
+
+
+######################
+### Parse config #####
+# Config format:
+# ext/mime <default app> [secondary apps]
+# There is one default app, as much as secondary apps we want
+# All apps must be on the same line
+my (%ext, %mime, $setmime);
+
+open(my $parseconfig, '<', $configfile) or die "can't open $configfile: $!";
+
+while (<$parseconfig>) {
+    chomp;    # Remove \n at the end
+    if (not /^\#/ and not /^\s*$/) {
+        # Switch to mime hash
+        $setmime = 1 if /\[mime\]/;
+
+        # Split the line in key/value by the first space
+        my ($key, @value) = split(" ", $_);
+
+        # Add the value if exist (skip unless undefined)
+        next unless @value;
+        if ( not $setmime) {
+            $ext{$key} = \@value;
+            print "openwith :: DEBUG \%ext $key | @value\n" if $opt_d;
+        } else {
+            $mime{$key} = \@value;
+            print "openwith :: DEBUG \%mime $key | @value\n" if $opt_d;
+        }
+    }
+}
+close $parseconfig or die "can't close $configfile: $!";
+
+
+####################################
+### Output file(s) linked apps #####
+# Loop through all files given as arguments
+# For each:
+#     1) check the extention
+#     2) if not if found, check the mime type if the flag -m is set
+#     3) output:
+#        a) the default app (by default)
+#        b) all the possible apps
+
+my $separator = ( $opt_o ? " " : "\n" );
+print "=============================================\n" if $opt_d;
+
+foreach (@ARGV) {
+    # Get file extention
+    my ($fileExt) = $_ =~ /(\.[^.]+)$/;
+    $fileExt = substr($fileExt, 1) if $fileExt;
+    print "openwith :: DEBUG $_ :: extension: $fileExt\n" if $opt_d and $fileExt;
+
+    # Check if apps are associated with
+    if ( $fileExt && exists($ext{$fileExt}) ) {
+        if ( $opt_a ) {
+            # Print all possible apps
+            foreach (@{$ext{$fileExt}}) {
+                print "$_$separator";
+            }
+        } else {
+            # By default, print 'default' app
+            print "$ext{$fileExt}[0]$separator";
+        }
+
+    # If it is a directory
+    } elsif ( -d $_ ) {
+        print "@{$ext{directory}}$separator" if $ext{directory};
+
+    # If no ext found, if -m, check mime type
+    } elsif ( $opt_m and -f $_) {
+        # Get file mime type
+        my $mimetype = `file -Lb --mime-type $_`;
+        $mimetype =~ s/\//_/;
+        if ( not exists($mime{$mimetype}) ) {
+            $mimetype = substr($mimetype, 0, index($mimetype, "_"));
+        }
+        print "openwith :: DEBUG $_ :: mimetype: $mimetype\n" if $opt_d;
+
+        # If the mimetype is found in the config:
+        if ( exists($mime{$mimetype}) ) {
+            if ( $opt_a ) {
+                # Print all possible apps
+                foreach (@{$mime{$mimetype}}) {
+                    print "$_$separator";
+                }
+            } else {
+                # By default, print 'default' app
+                print "$mime{$mimetype}[0]$separator";
+            }
+        } else {
+            print "openwith :: DEBUG $_ :: no mime found\n" if $opt_d;
+            print "null$separator" if $opt_n;
+
+            if ( not $opt_n and exists($ext{unknown}) ) {
+                print "@{$ext{unknown}}$separator";
+            }
+        }
+    } else {
+        print "openwith :: DEBUG $_ :: no extension found\n" if $opt_d;
+        print "null$separator" if $opt_n;
+
+        if ( not $opt_n and exists($ext{unknown}) ) {
+                print "@{$ext{unknown}}$separator";
+        }
+    }
+
+    # With opt_o: one line per file
+    print "\n" if $opt_o; # One line with multiple apps per file
+}
