@@ -20,3 +20,7 @@ Instead of using the mimeapps.list file to associate a mimetype to a .desktop fi
 ex: `pdf zathura emacs firefox`
 
 But you can ALSO associate apps to mimetype, in the section `[mime]` of the config. All the following associations will be used only with the `-m` flag if the file extension doesn't match any one in the config, or if the file extension is not found. 
+
+## Install
+Copy openwith to /usr/local/bin
+Copy openwith to ~/.config/openwith.conf (to change its location/name, just edit /usr/local/bin/openwith)
