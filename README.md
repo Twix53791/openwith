@@ -44,3 +44,13 @@ cf. openwith.conf for an example...
 ## Install
 Copy openwith to /usr/local/bin.<br>
 Copy openwith to ~/.config/openwith.conf (to change its location/name, just edit /usr/local/bin/openwith).
+
+## Why I wrote this script?
+#### Xdg-open is bad
+The main problem with xfg-open is it not recognized rare file types. Many rare file extensions have not a specific mime type, and xdg-open just don't find them. Moreover, the .desktop files used by xdg-open to run applications is uselessly complicated (with openwith, just wrote shell scripts to run complex commands). Another sad thing if xdg-open can't be used to choose between a list of possibles applications (openwith can do that very simply).
+
+Many alternatives to xdg-open exist on github ([slopen](https://github.com/hckiang/slopen), [jaro](https://github.com/isamert/jaro), [mimi](https://github.com/march-linux/mimi), [semame](https://github.com/green7ea/sesame), [prodigy](https://github.com/yogeshdcool/prodigy)), BUT<br>
+- some are not writed in a 'user-friendly' language (sesame is in rust, jaro in scheme, ...)
+- most of them have a (uselessly) coplex syntax (sesame, jaro, but even slopen)
+- some need dependencies
+- most of them just set a default application, but not a list of possibles applications (usefull to use in other scripts, like a fzf-menu!)
