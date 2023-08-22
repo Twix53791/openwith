@@ -52,6 +52,6 @@ The main problem with xfg-open is it not recognized rare file types. Many rare f
 #### The alternatives are not enough simple, versatile and reliable
 Many alternatives to xdg-open exist on github ([slopen](https://github.com/hckiang/slopen), [jaro](https://github.com/isamert/jaro), [mimi](https://github.com/march-linux/mimi), [semame](https://github.com/green7ea/sesame), [prodigy](https://github.com/yogeshdcool/prodigy)), BUT<br>
 - some are not writed in a 'user-friendly' language (sesame is in rust, jaro in scheme, ...)
-- most of them have a (uselessly) coplex syntax (sesame, jaro, but even slopen)
+- most of them have a (uselessly) complex syntax (sesame, jaro, but even slopen)
 - some need dependencies
 - most of them just set a default application, but not a list of possibles applications (usefull to use in other scripts, like a fzf-menu!)
