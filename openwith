@@ -1,8 +1,8 @@
 #!/bin/perl
 # MADE BY twix :: https://github.com/Twix53791/openwith
 #=======================================================
-
 use Getopt::Std;
+use Text::ParseWords;
 
 ####################
 ### Config file ####
@@ -32,7 +32,7 @@ while (<$parseconfig>) {
         $setmime = 1 if /\[mime\]/;
 
         # Split the line in key/value by the first space
-        my ($key, @value) = split(" ", $_);
+        my ($key, @value) = shellwords($_);
 
         # Add the value if exist (skip unless undefined)
         next unless @value;
@@ -61,7 +61,10 @@ close $parseconfig or die "can't close $configfile: $!";
 my $separator = ( $opt_o ? " " : "\n" );
 print "=============================================\n" if $opt_d;
 
-foreach (@ARGV) {
+my @files = ( @ARGV ? @ARGV : <STDIN> );
+
+foreach (@files) {
+    chomp;
     # Get file extention
     my ($fileExt) = $_ =~ /(\.[^.]+)$/;
     $fileExt = substr($fileExt, 1) if $fileExt;
