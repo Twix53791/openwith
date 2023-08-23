@@ -15,7 +15,7 @@ It follows the Unix philosphy: "doing one thing and doing it well". Openwith use
 It is recommanded to combine the -a flag with -o flag for multiples files.
 
 #### Run complex commands?
-In the config file, the application names cannot contains spaces (there are supposed to be commands). It is not possible to run commands with flags, for example to run `kitty -e ranger`. To use this kind of complex syntax, just create a script in /usr/local/bin, running the complex command, and run this script instead with openwith.
+In the config file, you can wrap complex command between quotes : `kitty -e ranger`. You can also create a script running a command in /usr/local/bin and run this script instead with openwith.
 
 ## Config format
 The principle of openwith is to check the file type by the file extension instead of the mime type, to be faster and more customizable than xdg-open (not every file extension has a specific mime type, especially rare file extension like the camera raw files).<br>
